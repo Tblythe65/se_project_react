@@ -1,0 +1,32 @@
+.modal__content_type_image {
+  max-width: 498px;
+  max-height: 610px;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+}
+
+.modal__close_type_image {
+  background: url(../../assets/white-closebtn.svg);
+}
+
+.modal__image {
+  height: 498px;
+  object-fit: contain;
+}
+
+.modal__footer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 32px;
+}
+
+.modal__caption {
+  margin: 0;
+  font-size: 20px;
+}
+
+.modal__weather {
+  margin: 12px 0 0;
+  font-size: 20px;
+}
