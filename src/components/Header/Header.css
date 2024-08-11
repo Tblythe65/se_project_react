@@ -37,3 +37,9 @@
 .header__username {
   margin: 0;
 }
+
+.header__btn-switch {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
