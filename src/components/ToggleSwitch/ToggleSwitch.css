@@ -5,7 +5,7 @@
 
 .switch__box {
   border-radius: 25px;
-  border: 2px solid #000;
+  border: 2px solid rgba(0, 0, 0, 0.5);
   width: 56px;
   height: 28px;
   appearance: none;
@@ -14,8 +14,8 @@
 
 .switch__slider {
   border-radius: 20px;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -24,30 +24,29 @@
 }
 
 .switch__slider-f {
-  top: -1px;
   left: 1px;
 }
 
 .switch__slider-c {
-  top: -1px;
-  left: 25px;
+  left: 27px;
 }
 
 .switch__temp-f {
   position: absolute;
-  top: -7px;
-  left: 14px;
-  color: #fff;
+  top: -8px;
+  left: 11px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
 }
 
 .switch__temp-c {
   position: absolute;
-  top: -7px;
-  left: 38px;
-  color: #fff;
+  top: -8px;
+  left: 37px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
 }
 
 .switch__active {
-  font-size: 14px;
   color: #fff;
 }
