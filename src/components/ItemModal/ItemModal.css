@@ -4,6 +4,16 @@
   padding: 0;
   overflow: hidden;
   border: none;
+  background-color: #fff;
+  position: relative;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .modal__close_type_image {
@@ -17,8 +27,8 @@
 
 .modal__footer {
   display: flex;
-  flex-direction: column;
-  margin: 20px 32px;
+  justify-content: space-between;
+  margin: 20px 32px 12px;
 }
 
 .modal__caption {
@@ -26,7 +36,17 @@
   font-size: 20px;
 }
 
+.modal__delete {
+  color: #ff4d00;
+  border: none;
+  background-color: #fff;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .modal__weather {
-  margin: 12px 0 0;
+  margin: 0 32px;
   font-size: 20px;
 }
