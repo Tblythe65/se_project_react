@@ -24,4 +24,4 @@ async function deleteCard(_id) {
   return request(`${baseUrl}/items/${_id}`, { method: "DELETE" });
 }
 
-export { getItems, addItems, deleteCard };
+export { getItems, addItems, deleteCard, request, baseUrl };

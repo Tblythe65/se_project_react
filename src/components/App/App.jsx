@@ -5,12 +5,15 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Routes, Route } from "react-router-dom";
 import { getItems, addItems, deleteCard } from "../../utils/api";
+import { signIn, signUp } from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,6 +25,13 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    avatar: "",
+    email: "",
+    _id: "",
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -30,6 +40,10 @@ function App() {
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
+  };
+
+  const handleRegisterClick = () => {
+    setActiveModal("signup");
   };
 
   const closeActiveModal = () => {
@@ -58,6 +72,25 @@ function App() {
           return card._id !== selectedCard._id;
         });
         setClothingItems(filteredCards);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleSignUp = (data) => {
+    signUp(data)
+      .then((res) => {
+        handleLogIn(res);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleLogIn = (data) => {
+    signIn(data)
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser(res.user);
         closeActiveModal();
       })
       .catch(console.error);
@@ -121,6 +154,16 @@ function App() {
           onClose={closeActiveModal}
           isOpen={activeModal === "preview"}
           handleCardDelete={handleCardDelete}
+        />
+        <RegisterModal
+          onClose={closeActiveModal}
+          isOpen={activeModal === "signup"}
+          onSignUp={handleSignUp}
+        />
+        <LoginModal
+          onClose={closeActiveModal}
+          isOpen={activeModal === "signin"}
+          onSignIn={handleLogIn}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
