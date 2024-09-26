@@ -12,16 +12,22 @@ async function getItems() {
   return request(`${baseUrl}/items`, { method: "GET" });
 }
 
-async function addItems({ name, imageUrl, weather }) {
+async function addItems({ name, imageUrl, weather, token }) {
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({ name, imageUrl, weather }),
   });
 }
 
-async function deleteCard(_id) {
-  return request(`${baseUrl}/items/${_id}`, { method: "DELETE" });
+async function deleteCard(_id, token) {
+  return request(`${baseUrl}/items/${_id}`, {
+    method: "DELETE",
+    authorization: `Bearer ${token}`,
+  });
 }
 
 export { getItems, addItems, deleteCard, request, baseUrl };

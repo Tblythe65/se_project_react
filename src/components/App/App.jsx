@@ -13,7 +13,8 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Routes, Route } from "react-router-dom";
 import { getItems, addItems, deleteCard } from "../../utils/api";
-import { signIn, signUp } from "../../utils/auth";
+import { signIn, signUp, checkToken } from "../../utils/auth";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -31,7 +32,7 @@ function App() {
     email: "",
     _id: "",
   });
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -89,8 +90,9 @@ function App() {
   const handleLogIn = (data) => {
     signIn(data)
       .then((res) => {
-        setLoggedIn(true);
+        setIsLoggedIn(true);
         setCurrentUser(res.user);
+        localStorage.setItem("jwt", res.token);
         closeActiveModal();
       })
       .catch(console.error);
@@ -109,6 +111,21 @@ function App() {
     getItems()
       .then((data) => {
         setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (!jwt) {
+      return;
+    }
+
+    checkToken(jwt)
+      .then((user) => {
+        setIsLoggedIn(true);
+        setCurrentUser(user);
       })
       .catch(console.error);
   }, []);
@@ -134,11 +151,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
