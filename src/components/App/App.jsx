@@ -59,6 +59,15 @@ function App() {
     setActiveModal("signin");
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+  };
+
+  const handleLogOutClick = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -91,6 +100,7 @@ function App() {
   };
 
   const handleSignUp = (data) => {
+    console.log(data);
     signUp(data)
       .then((res) => {
         handleLogIn(res);
@@ -207,6 +217,9 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      handleLogOutClick={handleLogOutClick}
+                      handleEditProfileClick={handleEditProfileClick}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

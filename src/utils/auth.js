@@ -1,10 +1,10 @@
 import { request, baseUrl } from "./api";
 
-function signUp({ name, avatarUrl: avatar, email, password }) {
+function signUp({ name, avatarUrl, email, password }) {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, avatar, email, password }),
+    body: JSON.stringify({ name, avatarUrl, email, password }),
   });
 }
 
