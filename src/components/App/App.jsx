@@ -7,13 +7,20 @@ import Profile from "../Profile/Profile";
 import ItemModal from "../ItemModal/ItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { Routes, Route } from "react-router-dom";
-import { getItems, addItems, deleteCard } from "../../utils/api";
-import { signIn, signUp, checkToken } from "../../utils/auth";
+import {
+  getItems,
+  addItems,
+  deleteCard,
+  likeCard,
+  unlikeCard,
+} from "../../utils/api";
+import { signIn, signUp, checkToken, editProfile } from "../../utils/auth";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -103,6 +110,37 @@ function App() {
       .catch(console.error);
   };
 
+  const handleEditProfile = (data) => {
+    const token = localStorage.getItem("jwt");
+
+    editProfile(data, token)
+      .then((res) => {
+        setCurrentUser(res.data);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleCardLike = ({ data, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+
+    !isLiked
+      ? likeCard(data._id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch(console.error)
+      : unlikeCard(data._id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch(console.error);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -121,13 +159,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
 
-    if (!jwt) {
+    if (!token) {
       return;
     }
 
-    checkToken(jwt)
+    checkToken(token)
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user);
@@ -157,6 +195,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -195,6 +234,11 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "signin"}
             onSignIn={handleLogIn}
+          />
+          <EditProfileModal
+            onClose={closeActiveModal}
+            isOpen={activeModal === "edit-profile"}
+            onEditProfile={handleEditProfile}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

@@ -26,4 +26,15 @@ function checkToken(token) {
   });
 }
 
-export { signUp, signIn, checkToken };
+function editProfile({ name, avatarUrl: avatar }, token) {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+}
+
+export { signUp, signIn, checkToken, editProfile };
