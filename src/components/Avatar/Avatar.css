@@ -1,0 +1,15 @@
+.avatar__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 35px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0044ff;
+}

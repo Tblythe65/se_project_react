@@ -36,6 +36,10 @@
   cursor: pointer;
 }
 
+.modal__delete_hidden {
+  visibility: hidden;
+}
+
 .modal__weather {
   margin: 0 32px;
   font-size: 20px;
