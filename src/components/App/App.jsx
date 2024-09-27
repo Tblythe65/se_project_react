@@ -103,7 +103,7 @@ function App() {
     console.log(data);
     signUp(data)
       .then((res) => {
-        handleLogIn(res);
+        handleLogIn(data);
         closeActiveModal();
       })
       .catch(console.error);
