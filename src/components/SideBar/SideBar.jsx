@@ -7,20 +7,22 @@ function SideBar({ handleLogOutClick, handleEditProfileClick }) {
 
   return (
     <div className="sidebar">
-      <img className="sidebar__avatar" src={avatar} alt="avatar" />
-      <p className="sidebar__username">{name}</p>
+      <div className="sidebar__profile-info">
+        <img className="sidebar__avatar" src={avatar} alt="avatar" />
+        <p className="sidebar__username">{name}</p>
+      </div>
       <div className="sidebar__buttons">
         <button
           onClick={handleEditProfileClick}
           type="button"
-          className="sidebar__edit-profile"
+          className="sidebar__button"
         >
           Change profile data
         </button>
         <button
           onClick={handleLogOutClick}
           type="button"
-          className="sidebar__logout"
+          className="sidebar__button"
         >
           Log out
         </button>

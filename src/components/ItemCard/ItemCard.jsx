@@ -1,4 +1,6 @@
 import "./ItemCard.css";
+import liked from "../../assets/LikedHeart.svg";
+import unliked from "../../assets/UnlikedHeart.svg";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const handleCardClick = () => {

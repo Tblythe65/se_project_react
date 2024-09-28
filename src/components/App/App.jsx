@@ -79,7 +79,9 @@ function App() {
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    addItems({ name, imageUrl, weather })
+    const token = localStorage.getItem("jwt");
+
+    addItems({ name, imageUrl, weather, token })
       .then((items) => {
         setClothingItems([items, ...clothingItems]);
         closeActiveModal();
@@ -88,7 +90,9 @@ function App() {
   };
 
   const handleCardDelete = (card) => {
-    deleteCard(selectedCard._id)
+    const token = localStorage.getItem("jwt");
+
+    deleteCard(selectedCard._id, token)
       .then(() => {
         const filteredCards = clothingItems.filter((card) => {
           return card._id !== selectedCard._id;
@@ -100,7 +104,6 @@ function App() {
   };
 
   const handleSignUp = (data) => {
-    console.log(data);
     signUp(data)
       .then((res) => {
         handleLogIn(data);
