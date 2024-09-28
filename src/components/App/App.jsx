@@ -134,21 +134,21 @@ function App() {
       .catch(console.error);
   };
 
-  const handleCardLike = ({ data, isLiked }) => {
+  const handleCardLike = ({ item, isLiked }) => {
     const token = localStorage.getItem("jwt");
 
     !isLiked
-      ? likeCard(data._id, token)
+      ? likeCard(item._id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((card) => (card._id === item._id ? updatedCard : card))
             );
           })
           .catch(console.error)
-      : unlikeCard(data._id, token)
+      : unlikeCard(item._id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((card) => (card._id === item._id ? updatedCard : card))
             );
           })
           .catch(console.error);
