@@ -12,7 +12,7 @@ function Avatar() {
       className="avatar__image"
     />
   ) : (
-    <div className="avatar__image">{name.charAt(0)}</div>
+    <div className="avatar__image">{currentUser?.name.charAt(0)}</div>
   );
 }
 
