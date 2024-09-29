@@ -36,6 +36,7 @@ function RegisterModal({ isOpen, onClose, onSignUp }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      modalClass="modal__content modal__content_type_form"
     >
       <label htmlFor="email" className="modal__label">
         Email*{" "}

@@ -30,6 +30,7 @@ const AddItemModal = ({ onClose, isOpen, onAddItem }) => {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      modalClass="modal__content modal__content_type_form"
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}

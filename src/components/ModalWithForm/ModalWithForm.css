@@ -55,6 +55,13 @@
   border: solid 1px #0000004d;
 }
 
+.modal__content_type_form_small {
+  padding: 28px 28px 36px;
+  max-width: 496px;
+  max-height: 304px;
+  border: solid 1px #0000004d;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;

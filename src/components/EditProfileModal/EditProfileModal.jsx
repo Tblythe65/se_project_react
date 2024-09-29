@@ -26,6 +26,7 @@ function EditProfileModal({ isOpen, onClose, onEditProfile }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      modalClass="modal__content modal__content_type_form_small"
     >
       <label htmlFor="name" className="modal__label">
         Name *{" "}
