@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function EditProfileModal({ isOpen, onClose, onEditProfile }) {
+  const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
 
@@ -18,6 +20,13 @@ function EditProfileModal({ isOpen, onClose, onEditProfile }) {
     e.preventDefault();
     onEditProfile({ name, avatarUrl });
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      setName(currentUser?.name);
+      setAvatarUrl(currentUser?.avatar);
+    }
+  }, [currentUser]);
 
   return (
     <ModalWithForm
