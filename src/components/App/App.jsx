@@ -133,7 +133,7 @@ function App() {
 
     editProfile(data, token)
       .then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
         closeActiveModal();
       })
       .catch(console.error);
@@ -194,6 +194,18 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (isLoggedIn) {
+      checkToken(token)
+        .then((user) => {
+          setCurrentUser(user);
+        })
+        .catch(console.error);
+    }
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
