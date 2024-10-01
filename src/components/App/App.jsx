@@ -119,6 +119,7 @@ function App() {
         setCurrentUser(res.user);
         localStorage.setItem("jwt", res.token);
         closeActiveModal();
+        window.location.reload();
       })
       .catch(console.error);
   };
@@ -130,6 +131,7 @@ function App() {
       .then((res) => {
         setCurrentUser(res.data);
         closeActiveModal();
+        window.location.reload();
       })
       .catch(console.error);
   };
