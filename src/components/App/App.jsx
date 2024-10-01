@@ -8,6 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPI";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -66,6 +67,10 @@ function App() {
   const handleLogOutClick = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+  };
+
+  const handleDeleteItemClick = () => {
+    setActiveModal("delete-item");
   };
 
   const closeActiveModal = () => {
@@ -247,7 +252,7 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             isOpen={activeModal === "preview"}
-            handleCardDelete={handleCardDelete}
+            handleDeleteItemClick={handleDeleteItemClick}
           />
           <RegisterModal
             onClose={closeActiveModal}
@@ -265,6 +270,11 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "edit-profile"}
             onEditProfile={handleEditProfile}
+          />
+          <DeleteItemModal
+            onClose={closeActiveModal}
+            isOpen={activeModal === "delete-item"}
+            onDelete={handleCardDelete}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>
