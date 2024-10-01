@@ -9,6 +9,7 @@ function Profile({
   handleLogOutClick,
   handleEditProfileClick,
   onCardLike,
+  isLoggedIn,
 }) {
   return (
     <div className="profile">
@@ -24,6 +25,7 @@ function Profile({
           clothingItems={clothingItems}
           handleAddClick={handleAddClick}
           onCardLike={onCardLike}
+          isLoggedIn={isLoggedIn}
         />
       </section>
     </div>
