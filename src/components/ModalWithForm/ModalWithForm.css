@@ -120,6 +120,7 @@
   color: #fff;
   background: #000;
   opacity: 100%;
+  padding: 0;
 }
 
 .modal__submit:hover {
@@ -129,4 +130,11 @@
 
 .modal__submit_disabled {
   opacity: 30%;
+}
+
+.modal__submit_switch {
+  background: none;
+  color: #000;
+  opacity: 30%;
+  width: 85px;
 }
